@@ -3,7 +3,7 @@ MAINTAINER Per Abich <per.abich@visma.com>
 #RUN echo "deb http://fr.archive.ubuntu.com/ubuntu trusty main restricted universe multiverse\n" \
 #          > /etc/apt/sources.list
 RUN apt-get update
-RUN apt-get install -y wget unzip curl git procps
+RUN apt-get install -y wget unzip curl git procps sudo
 
 # Install Ruby
 RUN wget https://keybase.io/mpapis/key.asc
@@ -24,4 +24,4 @@ RUN bash -c "source /usr/local/rvm/scripts/rvm && bundle install"
 
 EXPOSE 3000
 ENTRYPOINT ["/bin/bash"]
-CMD ["-c", "source /usr/local/rvm/scripts/rvm && ruby web_server.rb"]
+CMD ["-c", "source /usr/local/rvm/scripts/rvm && export -f rvm_debug && ruby web_server.rb"]
